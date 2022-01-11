@@ -1,0 +1,34 @@
+.wrapper {
+    background-color: gray;
+    box-sizing: border-box;
+    margin: 50px auto;
+    padding: 15px;
+    width: 500px;
+}
+
+.header {
+    text-align: center;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.tab {
+    line-height: 50px;
+    text-align: center;
+    height: 50px;
+    width: 50%;
+}
+
+.taskList {
+    background-color: white;
+    box-sizing: border-box;
+    padding: 5px;
+    height: 65vh;
+}
+
+.bottomPanel {
+    text-align: center;
+}

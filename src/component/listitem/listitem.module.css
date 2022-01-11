@@ -1,0 +1,16 @@
+.listItem {
+    margin: 5px;
+}
+
+.checkbox {
+    margin-right: 10px;
+}
+
+.checked {
+    text-decoration: line-through;
+}
+
+.complitionDate {
+    display: block;
+    margin-left: 27px;
+}
