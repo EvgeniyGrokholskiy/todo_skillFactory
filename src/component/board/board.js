@@ -3,7 +3,6 @@ import style from "./board.module.css";
 import ListItem from "../listitem/listitem";
 import InputTask from "../inputtask/inputtask";
 import Button from "../button/button";
-import {logDOM} from "@testing-library/react";
 
 class Board extends React.Component {
     constructor(props) {
@@ -78,10 +77,15 @@ class Board extends React.Component {
     completeTask = () => {
         let newEndTasks = this.state.doneTask
         let endTask = this.state.todo.filter((task) => task.done)
-        newEndTasks.push(endTask)
+
+        if (endTask.length === 0) return
+        endTask.forEach((task)=>{
+            newEndTasks.push(task)
+        })
+
         console.log(newEndTasks);
         this.setState({
-            doneTask: [...this.state.doneTask, newEndTasks]
+            doneTask: newEndTasks
         })
 
         let newTodo = this.state.todo.filter((task) => !task.done)
