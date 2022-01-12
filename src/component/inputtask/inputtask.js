@@ -5,7 +5,7 @@ const InputTask = ({textInField,changeText}) => {
 
     return (
         <textarea className={stile.textarea} value={textInField} onChange={(event)=>{
-            changeText(event.target.value)}}/>
+            changeText({newTask: event.target.value})}}/>
     )
 
 }

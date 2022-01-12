@@ -9,17 +9,21 @@ class Board extends React.Component {
         this.state = props.state
     }
 
-    changeActiveTab = (id) => {
+    changeState = (obj) => {
+        this.setState(obj)
+    }
+
+/*    changeActiveTab = (id) => {
         this.setState({
             tabNumber: id
         })
-    }
+    }*/
 
-    changeText = (text) => {
+/*    changeText = (text) => {
         this.setState({
             newTask: text
         })
-    }
+    }*/
 
     setDone = (id) => {
         const time = new Date().toLocaleTimeString()
@@ -74,11 +78,7 @@ class Board extends React.Component {
             doneTask: newEndTasks
         })
 
-        let newTodo = this.state.todo.filter((task) => !task.done)
-
-        this.setState({
-            todo: newTodo,
-        })
+        this.deleteTask()
     }
 
     render() {
@@ -88,14 +88,14 @@ class Board extends React.Component {
                 <h2 className={style.header}>Список задач.</h2>
 
                 <TabbedFields tabNumber={this.state.tabNumber}
-                              changeActiveTab={this.changeActiveTab}
+                              changeActiveTab={this.changeState}
                               setDone={this.setDone}
                               doneTask={this.state.doneTask}
                               todo={this.state.todo}
                 />
 
                 <BottomPanel newTask={this.state.newTask}
-                             changeText={this.changeText}
+                             changeText={this.changeState}
                              addTask={this.addTask}
                              deleteTask={this.deleteTask}
                              completeTask={this.completeTask}

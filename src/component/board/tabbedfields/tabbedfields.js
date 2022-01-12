@@ -12,7 +12,7 @@ function TabbedFields({todo, doneTask, setDone, tabNumber, changeActiveTab}) {
     })
 
     const DoneTaskList = doneTask.map((task) => {
-        return <ListItem key={`${task.id}${task.name}`} name={task.name} checked={true} date={task.doneTime}/>
+        return <ListItem key={`${task.id}${task.name}`} name={task.name} checked={true} date={task.doneTime} disabled={true}/>
     })
 
     return (
@@ -20,12 +20,12 @@ function TabbedFields({todo, doneTask, setDone, tabNumber, changeActiveTab}) {
             <div className={style.tabs}>
                 <div className={`${style.tab} ${tabNumber === 1 ? 'active' : ''}`} id={1}
                      onClick={(event) => {
-                         changeActiveTab(Number(event.currentTarget.id))
+                         changeActiveTab({tabNumber: Number(event.currentTarget.id)})
                      }}>Актуальные
                 </div>
                 <div className={`${style.tab} ${tabNumber === 2 ? 'active' : ''}`} id={2}
                      onClick={(event) => {
-                         changeActiveTab(Number(event.currentTarget.id))
+                         changeActiveTab({tabNumber: Number(event.currentTarget.id)})
                      }}>Завершенные
                 </div>
             </div>
