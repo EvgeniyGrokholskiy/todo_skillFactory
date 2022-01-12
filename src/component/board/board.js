@@ -1,9 +1,8 @@
 import React from "react";
 import style from "./board.module.css";
 import ListItem from "../listitem/listitem";
-import InputTask from "../inputtask/inputtask";
-import Button from "../button/button";
-import {logDOM} from "@testing-library/react";
+import BottomPanel from "./bottompanel/bottompanel";
+import TabbedFields from "./tabbedfields/tabbedfields";
 
 class Board extends React.Component {
     constructor(props) {
@@ -78,8 +77,9 @@ class Board extends React.Component {
     completeTask = () => {
         let newEndTasks = this.state.doneTask
         let endTask = this.state.todo.filter((task) => task.done)
+
         newEndTasks.push(endTask)
-        console.log(newEndTasks);
+
         this.setState({
             doneTask: [...this.state.doneTask, newEndTasks]
         })
@@ -107,7 +107,13 @@ class Board extends React.Component {
         return (
             <div className={style.wrapper}>
                 <h2 className={style.header}>Список задач.</h2>
-                <div className={style.tabs}>
+                <TabbedFields changeActiveTab={this.changeActiveTab}
+                              tabNumber={this.state.tabNumber}
+                              doneTaskList={doneTaskList}
+                              tasksList={tasksList}
+                />
+
+                {/*<div className={style.tabs}>
                     <div className={`${style.tab} ${this.state.tabNumber === 1 ? 'active' : ''}`} id={1}
                          onClick={(event) => {
                              this.changeActiveTab(Number(event.currentTarget.id))
@@ -127,13 +133,13 @@ class Board extends React.Component {
                             :
                             doneTaskList
                     }
-                </div>
-                <div className={style.bottomPanel}>
-                    <InputTask textInField={this.state.newTask} changeText={this.changeText}/>
-                    <Button innerText={"Добавить задачу"} callback={this.addTask}/>
-                    <Button innerText={"Удалить задачу"} callback={this.deleteTask}/>
-                    <Button innerText={"Готово"} callback={this.completeTask}/>
-                </div>
+                </div>*/}
+                <BottomPanel newTask={this.state.newTask}
+                             changeText={this.changeText}
+                             addTask={this.addTask}
+                             deleteTask={this.deleteTask}
+                             completeTask={this.completeTask}
+                />
 
             </div>
         )
