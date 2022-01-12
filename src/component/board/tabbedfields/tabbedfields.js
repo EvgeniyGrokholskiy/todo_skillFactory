@@ -1,7 +1,19 @@
 import React from 'react';
 import style from "./tabbedfields.module.css";
+import ListItem from "../../listitem/listitem";
 
-function TabbedFields({ tabNumber, changeActiveTab, tasksList, doneTaskList}) {
+function TabbedFields({todo, doneTask, setDone, tabNumber, changeActiveTab}) {
+
+    const TasksList = todo.map((task) => {
+        return <ListItem key={`${task.id}${task.name}`} name={task.name} checked={task.done} date={task.doneTime}
+                         setDone={() => {
+                             setDone(task.id)
+                         }}/>
+    })
+
+    const DoneTaskList = doneTask.map((task) => {
+        return <ListItem key={`${task.id}${task.name}`} name={task.name} checked={true} date={task.doneTime}/>
+    })
 
     return (
         <>
@@ -21,9 +33,9 @@ function TabbedFields({ tabNumber, changeActiveTab, tasksList, doneTaskList}) {
                 {
                     tabNumber === 1
                         ?
-                        tasksList
+                        TasksList
                         :
-                        doneTaskList
+                        DoneTaskList
                 }
             </div>
         </>

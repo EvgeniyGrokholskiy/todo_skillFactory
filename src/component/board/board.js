@@ -1,26 +1,12 @@
 import React from "react";
 import style from "./board.module.css";
-import ListItem from "../listitem/listitem";
-import InputTask from "../inputtask/inputtask";
-import Button from "../button/button";
-import {logDOM} from "@testing-library/react";
+import TabbedFields from "./tabbedfields/tabbedfields";
+import BottomPanel from "./bottompanel/bottompanel";
 
 class Board extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            todo: [
-                {id: 0, name: "123", done: false, doneTime: null},
-                {id: 1, name: "345", done: false, doneTime: null},
-                {id: 2, name: "678", done: false, doneTime: null},
-                {id: 3, name: "901", done: false, doneTime: null},
-                {id: 4, name: "234", done: false, doneTime: null},
-            ],
-            tabNumber: 1,
-            index: 5,
-            newTask: "",
-            doneTask: [],
-        }
+        this.state = props.state
     }
 
     changeActiveTab = (id) => {
@@ -84,7 +70,6 @@ class Board extends React.Component {
             newEndTasks.push(task)
         })
 
-        console.log(newEndTasks);
         this.setState({
             doneTask: newEndTasks
         })
@@ -98,47 +83,17 @@ class Board extends React.Component {
 
     render() {
 
-        const tasksList = this.state.todo.map((task) => {
-            return <ListItem key={`${task.id}${task.name}`} name={task.name} checked={task.done} date={task.doneTime}
-                             setDone={() => {
-                                 this.setDone(task.id)
-                             }}/>
-        })
-
-        const doneTaskList = this.state.doneTask.map((task) => {
-            return <ListItem key={`${task.id}${task.name}`} name={task.name} checked={true} date={task.doneTime}/>
-        })
-
         return (
             <div className={style.wrapper}>
                 <h2 className={style.header}>Список задач.</h2>
-                <TabbedFields changeActiveTab={this.changeActiveTab}
-                              tabNumber={this.state.tabNumber}
-                              doneTaskList={doneTaskList}
-                              tasksList={tasksList}
+
+                <TabbedFields tabNumber={this.state.tabNumber}
+                              changeActiveTab={this.changeActiveTab}
+                              setDone={this.setDone}
+                              doneTask={this.state.doneTask}
+                              todo={this.state.todo}
                 />
 
-                {/*<div className={style.tabs}>
-                    <div className={`${style.tab} ${this.state.tabNumber === 1 ? 'active' : ''}`} id={1}
-                         onClick={(event) => {
-                             this.changeActiveTab(Number(event.currentTarget.id))
-                         }}>Актуальные
-                    </div>
-                    <div className={`${style.tab} ${this.state.tabNumber === 2 ? 'active' : ''}`} id={2}
-                         onClick={(event) => {
-                             this.changeActiveTab(Number(event.currentTarget.id))
-                         }}>Завершенные
-                    </div>
-                </div>
-                <div className={style.taskList}>
-                    {
-                        this.state.tabNumber === 1
-                            ?
-                            tasksList
-                            :
-                            doneTaskList
-                    }
-                </div>*/}
                 <BottomPanel newTask={this.state.newTask}
                              changeText={this.changeText}
                              addTask={this.addTask}
