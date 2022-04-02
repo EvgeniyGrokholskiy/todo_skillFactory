@@ -13,18 +13,6 @@ class Board extends React.Component {
         this.setState(obj)
     }
 
-/*    changeActiveTab = (id) => {
-        this.setState({
-            tabNumber: id
-        })
-    }*/
-
-/*    changeText = (text) => {
-        this.setState({
-            newTask: text
-        })
-    }*/
-
     setDone = (id) => {
         const time = new Date().toLocaleTimeString()
 
